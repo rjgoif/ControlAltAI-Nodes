@@ -9,12 +9,15 @@ def pil2tensor(image):
 class FluxResolutionNode:
     @classmethod
     def INPUT_TYPES(cls):
-        # Generate megapixel options from 0.1 to 2.5 with 0.1 increments
-        megapixel_options = [f"{i/10:.1f}" for i in range(1, 26)]  # 0.1 to 2.5
-        
         return {
             "required": {
-                "megapixel": (megapixel_options, {"default": "1.0"}),
+                "megapixel": ("FLOAT", {
+                    "default": 1.0,
+                    "min": 0.1,
+                    "max": 10.0,
+                    "step": 0.1,
+                    "display": "number"
+                }),
                 "aspect_ratio": ([
                     "1:1 (Perfect Square)",
                     "2:3 (Classic Portrait)", "3:4 (Golden Ratio)", "3:5 (Elegant Vertical)", "4:5 (Artistic Frame)", "5:7 (Balanced Portrait)", "5:8 (Tall Portrait)",
